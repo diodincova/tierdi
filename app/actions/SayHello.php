@@ -4,10 +4,8 @@ namespace App\Actions;
 
 class SayHello
 {
-    public function exec(): string
+    public function exec(string $file, array $args): string
     {
-        $file = "name.txt";
-
         if(file_exists($file)) {
             $name = file_get_contents($file);
             return "Hello, $name\n";

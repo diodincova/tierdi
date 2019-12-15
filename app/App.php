@@ -8,8 +8,9 @@ class App
     {
         $actionName = ucfirst(array_shift($args));
         $className = "App\\Actions\\$actionName";
+        $filename = "name.txt";
 
         $class = new $className();
-        return $class->exec($args);
+        return $class->exec($filename, $args);
     }
 }
