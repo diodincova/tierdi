@@ -10,15 +10,18 @@ class Container
     private $dependencies;
     private $config;
 
-    public function __construct()
+    public function __construct($config)
     {
-        $this->config[IntrovertService::class] = [IntrovertService::class, [__DIR__.'/../name.txt']];
+        $this->config = $config;
     }
 
     public function get($serviceName)
     {
         if(!$this->dependencies[$serviceName]) {
-            $this->dependencies[$serviceName] = new Dependency(...$this->config[$serviceName]);
+            $this->dependencies[$serviceName] = new Dependency(
+                $this->config[$serviceName]['class'],
+                $this->config[$serviceName]['constructor_args']
+            );
         }
 
         return $this->dependencies[$serviceName]->resolve();
