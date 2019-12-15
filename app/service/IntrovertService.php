@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-class IntrovertService
+class IntrovertService implements ServiceInterface
 {
     /** @var string */
     private $filename;

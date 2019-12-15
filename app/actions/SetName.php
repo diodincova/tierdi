@@ -2,16 +2,16 @@
 
 namespace App\Actions;
 
-use App\Service\IntrovertService;
+use App\Service\ServiceInterface;
 
 class SetName
 {
-    /** @var IntrovertService */
+    /** @var ServiceInterface */
     private $service;
 
-    public function __construct(IntrovertService $introvertService)
+    public function __construct(ServiceInterface $service)
     {
-        $this->service = $introvertService;
+        $this->service = $service;
     }
 
     public function exec($data)

@@ -1,20 +1,21 @@
 <?php
 
-use App\Service\IntrovertService;
+use \App\Service\ServiceInterface;
+use \App\Service\WorldService;
 use App\Actions\SayHello;
 use App\Actions\SetName;
 
 return [
-    IntrovertService::class => [
-        'class' => IntrovertService::class,
+    ServiceInterface::class => [
+        'class' => WorldService::class,
         'constructorArgs' => [__DIR__.'/../name.txt'],
     ],
     SayHello::class => [
         'class' => SayHello::class,
-        'constructorArgs' => ['@' . IntrovertService::class],
+        'constructorArgs' => ['@' . ServiceInterface::class],
     ],
     SetName::class => [
         'class' => SetName::class,
-        'constructorArgs' => ['@' . IntrovertService::class],
+        'constructorArgs' => ['@' . ServiceInterface::class],
     ],
 ];
