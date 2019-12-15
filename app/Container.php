@@ -7,16 +7,26 @@ use App\Service\IntrovertService;
 class Container
 {
     /** @var array */
-    private $services;
+    private $dependencies;
 
     public function __construct()
     {
-        $this->services = [];
-        $this->services[IntrovertService::class] = new IntrovertService(__DIR__.'/../name.txt');
+        $this->dependencies = [];
+
+        $this->dependencies[] = new Dependency(IntrovertService::class, [__DIR__.'/../name.txt']);
     }
 
     public function get($key)
     {
-        return $this->services[$key];
+        if (!isset($this->services[$key])) {
+            $this->dependencies[$key] = $this->create($key);
+        }
+
+        return $this->dependencies[$key];
+    }
+
+    private function create(string $serviceName)
+    {
+        return $this->dependencies[$serviceName]->resolve();
     }
 }

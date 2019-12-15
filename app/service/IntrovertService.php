@@ -12,7 +12,7 @@ class IntrovertService
         $this->filename = $filename;
     }
 
-    public function read(): string
+    public function read()
     {
         if (!file_exists($this->filename)) {
             return false;
