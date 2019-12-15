@@ -20,7 +20,7 @@ class Container
         if(!$this->dependencies[$serviceName]) {
             $this->dependencies[$serviceName] = new Dependency(
                 $this->config[$serviceName]['class'],
-                $this->config[$serviceName]['constructor_args']
+                $this->config[$serviceName]['constructorArgs']
             );
         }
 
