@@ -20,7 +20,7 @@ class Dependency
             $args = [];
             foreach ($this->constructorArgs as $arg) {
                 if ($arg[0] === '@') {
-                    $args[] = $container->get($arg);
+                    $args[] = $container->get(substr($arg, 1));
                 } else {
                     $args[] = $arg;
                 }
