@@ -17,13 +17,7 @@ class App
         $actionName = ucfirst(array_shift($data));
         $className = "App\\Actions\\$actionName";
 
-        $class = new $className();
-        $classServices = $class->getArgs();
-        $args = [];
-        foreach ($classServices as $classService) {
-            $args[] = $this->container->get($classService);
-        }
-        $args[] = $data;
-        return $class->exec(...$args);
+        $class = $this->container->get($className);
+        return $class->exec($data);
     }
 }

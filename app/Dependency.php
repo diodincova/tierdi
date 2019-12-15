@@ -14,10 +14,18 @@ class Dependency
         $this->constructorArgs = $constructorArgs;
     }
 
-    public function resolve()
+    public function resolve(Container $container)
     {
         if(!$this->service) {
-            $this->service = new $this->className(...$this->constructorArgs);
+            $args = [];
+            foreach ($this->constructorArgs as $arg) {
+                if ($arg[0] === '@') {
+                    $args[] = $container->get($arg);
+                } else {
+                    $args[] = $arg;
+                }
+            }
+            $this->service = new $this->className(...$args);
         }
 
         return $this->service;

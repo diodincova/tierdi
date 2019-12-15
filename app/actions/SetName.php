@@ -6,17 +6,20 @@ use App\Service\IntrovertService;
 
 class SetName
 {
-    public function exec(IntrovertService $introvertService, $args)
+    /** @var IntrovertService */
+    private $service;
+
+    public function __construct(IntrovertService $introvertService)
     {
-        if($introvertService->write($args)) {
+        $this->service = $introvertService;
+    }
+
+    public function exec($data)
+    {
+        if($this->service->write($data)) {
             return "OK\n";
         }
 
         return "Error while saving\n";
-    }
-
-    public function getArgs()
-    {
-        return [IntrovertService::class];
     }
 }

@@ -6,17 +6,20 @@ use App\Service\IntrovertService;
 
 class SayHello
 {
-    public function exec(IntrovertService $introvertService): string
+    /** @var IntrovertService */
+    private $service;
+
+    public function __construct(IntrovertService $introvertService)
     {
-        if($name = $introvertService->read()) {
+        $this->service = $introvertService;
+    }
+
+    public function exec(): string
+    {
+        if($name = $this->service->read()) {
             return "Hello, $name\n";
         }
 
         return "Oh no! First, '$ php main.php setName <name>', please\n";
-    }
-
-    public function getArgs()
-    {
-        return [IntrovertService::class];
     }
 }

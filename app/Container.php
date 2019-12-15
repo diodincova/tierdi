@@ -24,6 +24,6 @@ class Container
             );
         }
 
-        return $this->dependencies[$serviceName]->resolve();
+        return $this->dependencies[$serviceName]->resolve($this);
     }
 }
