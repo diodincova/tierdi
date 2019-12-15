@@ -18,15 +18,10 @@ class Container
 
     public function get($key)
     {
-        if (!isset($this->services[$key])) {
-            $this->dependencies[$key] = $this->create($key);
+        if (!isset($this->dependencies[$key])) {
+            $this->dependencies[$key] = $this->dependencies[$key]->resolve();
         }
 
         return $this->dependencies[$key];
-    }
-
-    private function create(string $serviceName)
-    {
-        return $this->dependencies[$serviceName]->resolve();
     }
 }
