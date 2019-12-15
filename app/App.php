@@ -4,12 +4,26 @@ namespace App;
 
 class App
 {
-    public function run(array $args)
+    /** @var Container */
+    private $container;
+
+    public function __construct(Container $container)
     {
-        $actionName = ucfirst(array_shift($args));
+        $this->container = $container;
+    }
+
+    public function run(array $data)
+    {
+        $actionName = ucfirst(array_shift($data));
         $className = "App\\Actions\\$actionName";
 
         $class = new $className();
-        return $class->exec($args);
+        $classServices = $class->getArgs();
+        $args = [];
+        foreach ($classServices as $classService) {
+            $args[] = $this->container->get($classService);
+        }
+        $args[] = $data;
+        return $class->exec(...$args);
     }
 }

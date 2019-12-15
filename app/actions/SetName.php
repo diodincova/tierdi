@@ -2,14 +2,21 @@
 
 namespace App\Actions;
 
+use App\Service\IntrovertService;
+
 class SetName
 {
-    public function exec($args): string
+    public function exec(IntrovertService $introvertService, $args)
     {
-        $file = "name.txt";
+        if($introvertService->write($args)) {
+            return "OK\n";
+        }
 
-        file_put_contents($file, $args);
+        return "Error while saving\n";
+    }
 
-        return "OK\n";
+    public function getArgs()
+    {
+        return [IntrovertService::class];
     }
 }
