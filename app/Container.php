@@ -16,12 +16,8 @@ class Container
         $this->dependencies[IntrovertService::class] = new Dependency(IntrovertService::class, [__DIR__.'/../name.txt']);
     }
 
-    public function get($key)
+    public function get($serviceName)
     {
-        if (!isset($this->dependencies[$key])) {
-            $this->dependencies[$key] = $this->dependencies[$key]->resolve();
-        }
-
-        return $this->dependencies[$key];
+        return $this->dependencies[$serviceName]->resolve();
     }
 }
