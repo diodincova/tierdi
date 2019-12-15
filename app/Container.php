@@ -13,7 +13,7 @@ class Container
     {
         $this->dependencies = [];
 
-        $this->dependencies[] = new Dependency(IntrovertService::class, [__DIR__.'/../name.txt']);
+        $this->dependencies[IntrovertService::class] = new Dependency(IntrovertService::class, [__DIR__.'/../name.txt']);
     }
 
     public function get($key)
