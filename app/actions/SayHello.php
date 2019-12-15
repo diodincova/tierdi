@@ -4,7 +4,7 @@ namespace App\Actions;
 
 class SayHello
 {
-    public function exec(...$args): string
+    public function exec(): string
     {
         $file = "name.txt";
 
